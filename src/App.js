@@ -34,11 +34,11 @@ function State() {
     }, 1000);
 
     useEffect(updateStatus, []);
-    useInterval(updateStatus, 1500);
+    useInterval(updateStatus, 500);
     return (
         <React.Fragment>
             <h2>Door is {status.position}, Desired is {status.want}</h2>
-            <p>Count is {count}</p>
+            {/* <p>Count is {count}</p> */}
         </React.Fragment>
     );
 }
@@ -51,7 +51,7 @@ function Operate() {
         .catch(e => console.error(JSON.stringify(e)));
     }
     return (
-        <button onClick={operate} className='App-button'>Operate</button>
+        <button onClick={operate} className='App-button'>Operate Door</button>
     );
 }
 
