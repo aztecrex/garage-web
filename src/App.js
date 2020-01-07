@@ -13,6 +13,8 @@ function App() {
             </div>
             <div>
                 <Operate />
+                <Up />
+                <Down />
             </div>
         </div>
     );
@@ -37,8 +39,7 @@ function State() {
     useInterval(updateStatus, 500);
     return (
         <React.Fragment>
-            <h2>Door is {status.position}</h2>
-            {/* <h2>Door is {status.position}, Desired is {status.want}</h2> */}
+            <h2>Door is {status.position}, Desired is {status.want}</h2>
             {/* <p>Count is {count}</p> */}
         </React.Fragment>
     );
@@ -53,6 +54,30 @@ function Operate() {
     }
     return (
         <button onClick={operate} className='App-button'>Operate Door</button>
+    );
+}
+
+function Up() {
+    function operate() {
+        fetch('https://bfb3761ljd.execute-api.us-east-1.amazonaws.com/prod/api/up', {method: 'POST',})
+        .then(r => r.status)
+        .then(s => console.log("open ", s))
+        .catch(e => console.error(JSON.stringify(e)));
+    }
+    return (
+        <button onClick={operate} className='App-button'>Open</button>
+    );
+}
+
+function Down() {
+    function operate() {
+        fetch('https://bfb3761ljd.execute-api.us-east-1.amazonaws.com/prod/api/down', {method: 'POST',})
+        .then(r => r.status)
+        .then(s => console.log("close ", s))
+        .catch(e => console.error(JSON.stringify(e)));
+    }
+    return (
+        <button onClick={operate} className='App-button'>Close</button>
     );
 }
 
