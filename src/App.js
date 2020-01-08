@@ -13,8 +13,10 @@ function App() {
             </div>
             <div>
                 <Operate />
-                <Up />
-                <Down />
+                <div>
+                    <Down />
+                    <Up />
+                </div>
             </div>
         </div>
     );
@@ -47,10 +49,10 @@ function State() {
 
 function Operate() {
     function operate() {
-        fetch('https://bfb3761ljd.execute-api.us-east-1.amazonaws.com/prod/api/operate', {method: 'POST',})
-        .then(r => r.status)
-        .then(s => console.log("operate ", s))
-        .catch(e => console.error(JSON.stringify(e)));
+        fetch('https://bfb3761ljd.execute-api.us-east-1.amazonaws.com/prod/api/operate', { method: 'POST', })
+            .then(r => r.status)
+            .then(s => console.log("operate ", s))
+            .catch(e => console.error(JSON.stringify(e)));
     }
     return (
         <button onClick={operate} className='App-button'>Operate Door</button>
@@ -59,10 +61,10 @@ function Operate() {
 
 function Up() {
     function operate() {
-        fetch('https://bfb3761ljd.execute-api.us-east-1.amazonaws.com/prod/api/up', {method: 'POST',})
-        .then(r => r.status)
-        .then(s => console.log("open ", s))
-        .catch(e => console.error(JSON.stringify(e)));
+        fetch('https://bfb3761ljd.execute-api.us-east-1.amazonaws.com/prod/api/up', { method: 'POST', })
+            .then(r => r.status)
+            .then(s => console.log("open ", s))
+            .catch(e => console.error(JSON.stringify(e)));
     }
     return (
         <button onClick={operate} className='App-button'>Open</button>
@@ -71,10 +73,10 @@ function Up() {
 
 function Down() {
     function operate() {
-        fetch('https://bfb3761ljd.execute-api.us-east-1.amazonaws.com/prod/api/down', {method: 'POST',})
-        .then(r => r.status)
-        .then(s => console.log("close ", s))
-        .catch(e => console.error(JSON.stringify(e)));
+        fetch('https://bfb3761ljd.execute-api.us-east-1.amazonaws.com/prod/api/down', { method: 'POST', })
+            .then(r => r.status)
+            .then(s => console.log("close ", s))
+            .catch(e => console.error(JSON.stringify(e)));
     }
     return (
         <button onClick={operate} className='App-button'>Close</button>
