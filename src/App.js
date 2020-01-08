@@ -100,10 +100,11 @@ function Power({ children }) {
 
     useEffect(updateStatus, []);
     useInterval(updateStatus, 500);
+    if (!status.switch) return (<></>);
     return (
-        status.switch === "ON"
-            ? <>{children}</>
-            : <PowerOff />
+        status.switch === "OFF"
+            ? <PowerOff />
+            : <>{children}</>
     );
 }
 
