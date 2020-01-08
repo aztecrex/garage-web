@@ -1,27 +1,26 @@
 import React, { useState, useEffect, useRef } from 'react';
+import styled from 'styled-components';
 import './App.css';
 
 function App() {
 
     return (
         <div className="App">
-            <header className="App-header">
-                <h1>Garage</h1>
-            </header>
-            <div>
-                <State />
-            </div>
-            <div>
-                <Operate />
+            <Power>
+                <header className="App-header">
+                    <h1>Garage</h1>
+                </header>
                 <div>
-                    <Down />
-                    <Up />
+                    <State />
                 </div>
-            </div>
-            <hr />
-            <div>
-                <Power/>
-            </div>
+                <div>
+                    <Operate />
+                    <div>
+                        <Down />
+                        <Up />
+                    </div>
+                </div>
+            </Power>
         </div>
     );
 }
@@ -88,7 +87,7 @@ function Down() {
     );
 }
 
-function Power() {
+function Power({ children }) {
     const [status, setStatus] = useState({});
 
     function updateStatus() {
@@ -102,9 +101,9 @@ function Power() {
     useEffect(updateStatus, []);
     useInterval(updateStatus, 500);
     return (
-        <>
-            <h3>Power: {status.switch}</h3>
-        </>
+        status.switch === "ON"
+            ? <>{children}</>
+            : <PowerOff />
     );
 }
 
@@ -126,6 +125,32 @@ function useInterval(callback, delay) {
 }
 
 
+const BlackBack = styled.div`
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 25vmin;
+    background: #000;
+`
+
+
+const PowerAlert = () => {
+    return <svg version="1.1" width="100%" height="100%" viewBox={"0 0 24 24"}>
+        <path
+            fill="red"
+            d="M13,14H11V9H13M13,18H11V16H13M16.67,4H15V2H9V4H7.33A1.33,1.33 0 0,0 6,5.33V20.67C6,21.4 6.6,22 7.33,22H16.67A1.33,1.33 0 0,0 18,20.67V5.33C18,4.6 17.4,4 16.67,4Z" />
+    </svg>
+};
+
+const PowerOff = () => {
+    return (
+        <BlackBack>
+            <PowerAlert />
+        </BlackBack>
+    );
+};
 
 
 export default App;
