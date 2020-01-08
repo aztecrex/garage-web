@@ -18,6 +18,10 @@ function App() {
                     <Up />
                 </div>
             </div>
+            <hr />
+            <div>
+                <Power/>
+            </div>
         </div>
     );
 }
@@ -40,11 +44,11 @@ function State() {
     useEffect(updateStatus, []);
     useInterval(updateStatus, 500);
     return (
-        <React.Fragment>
+        <>
             <h3>Current: {status.position}</h3>
             <h3>Requested: {status.want}</h3>
             {/* <p>Count is {count}</p> */}
-        </React.Fragment>
+        </>
     );
 }
 
@@ -84,6 +88,25 @@ function Down() {
     );
 }
 
+function Power() {
+    const [status, setStatus] = useState({});
+
+    function updateStatus() {
+        fetch('https://bfb3761ljd.execute-api.us-east-1.amazonaws.com/prod/api/switch')
+            .then(r => r.json())
+            .then(r => setStatus(r))
+            .catch(e => console.error(JSON.stringify(e)));
+    }
+
+
+    useEffect(updateStatus, []);
+    useInterval(updateStatus, 500);
+    return (
+        <>
+            <h3>Power: {status.switch}</h3>
+        </>
+    );
+}
 
 function useInterval(callback, delay) {
     const savedCallback = useRef();
@@ -101,5 +124,8 @@ function useInterval(callback, delay) {
         return () => clearInterval(id);
     }, [delay]);
 }
+
+
+
 
 export default App;
