@@ -41,7 +41,8 @@ function State() {
     useInterval(updateStatus, 500);
     return (
         <React.Fragment>
-            <h2>Door is {status.position}, Desired is {status.want}</h2>
+            <h3>Current: {status.position}</h3>
+            <h3>Requested: {status.want}</h3>
             {/* <p>Count is {count}</p> */}
         </React.Fragment>
     );
